@@ -7,6 +7,7 @@ var renderer;
 var scene1, scene2;
 var camera1, camera2;
 var model, texture;
+var board;
 
 var modelSize = 42.0; //millimeters
 

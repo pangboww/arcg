@@ -1,0 +1,11 @@
+# Blender MTL File: 'pawn.blend'
+# Material Count: 1
+
+newmtl Material
+Ns 96.078431
+Ka 0.246194 0.246194 0.246194
+Kd 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ni 1.000000
+d 1.000000
+illum 1
