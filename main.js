@@ -9,7 +9,14 @@ var camera1, camera2;
 var model, texture;
 var board;
 
-var modelSize = 42.0; //millimeters
+var white = THREE.ImageUtils.loadTexture('Models/textures/whitemarble.jpg');
+var black = THREE.ImageUtils.loadTexture('Models/textures/blackmarble.jpg');
+
+var modelSize = 30;
+
+var count = 0;
+
+
 
 function onLoad(){
     video = document.getElementById("video");
@@ -82,7 +89,6 @@ function drawCorners(markers){
         context.strokeStyle = "blue";
         context.strokeRect(corners[0].x, corners[0].y, length, length);
     }
-
 };
 
 function createRenderers(){
@@ -99,6 +105,10 @@ function createRenderers(){
     scene2 = new THREE.Scene();
     camera2 = new THREE.PerspectiveCamera(40, canvas.width / canvas.height, 1, 1000);
     scene2.add(camera2);
+
+    var light = new THREE.PointLight(0xfffff3, 1);
+    light.position.set(-100,400,200);
+    scene2.add(light);
 
 
 };
@@ -135,15 +145,49 @@ function createTexture(){
 };
 
 function createModel(){
-    var object = new THREE.Object3D(),
-        geometry = new THREE.BoxGeometry(5,5,0.5),
-        material = new THREE.MeshBasicMaterial( {color: 0x00ff00}),
-        mesh = new THREE.Mesh(geometry, material);
+    //var object = new THREE.Object3D(),
+    //    geometry = new THREE.BoxGeometry(5,5,0.5),
+    //    material = new THREE.MeshBasicMaterial( {color: 0x00ff00}),
+    //    mesh = new THREE.Mesh(geometry, material);
+    //
+    //object.add(mesh);
+    var object = new THREE.Object3D;
+    var loader = new THREE.ColladaLoader();
 
-    object.add(mesh);
+    loader.options.convertUpAxis = true;
+
+    loader.load( 'Models/board.dae', function ( collada ) {
+        var dae = collada.scene;
+        dae.traverse(function(mesh){
+            if(mesh instanceof THREE.Mesh){
+                mesh.rotation.set(Math.PI/2,0,0);
+                mesh.scale.set(15,15,15);
+                object.add(mesh);
+                console.log(mesh);
+            }
+        });
+    });
+
+    //loader.load( 'Models/knight.dae', function ( collada ) {
+    //    var dae = collada.scene;
+    //    dae.position.set(0,0,0);
+    //    dae.scale.set(1,1,1);
+    //    console.log(dae);
+    //
+    //    dae.traverse(function(mesh){
+    //        if(mesh instanceof THREE.Mesh){
+    //            mesh.material.map = black;
+    //            mesh.material.map.needsUpdate = true;
+    //            mesh.scale.set(1,1,1);
+    //            mesh.rotation.set(Math.PI/2,0,0);
+    //            mesh.position.set(0,0,40);
+    //            object.add(mesh);
+    //        }
+    //    });
+    //});
+
 
     return object;
-
 }
 
 function updateScenes(markers){
@@ -167,13 +211,14 @@ function updateScenes(markers){
 };
 
 function updateObject(object, rotation, translation){
-    object.scale.x = modelSize;
-    object.scale.y = modelSize;
-    object.scale.z = modelSize;
+    object.scale.x = modelSize/100;
+    object.scale.y = modelSize/100;
+    object.scale.z = modelSize/100;
 
     object.rotation.x = -Math.asin(-rotation[1][2]);
     object.rotation.y = -Math.atan2(rotation[0][2], rotation[2][2]);
     object.rotation.z = Math.atan2(rotation[1][0], rotation[1][1]);
+
 
     object.position.x = translation[0];
     object.position.y = translation[1];
