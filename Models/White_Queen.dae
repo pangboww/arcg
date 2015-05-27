@@ -181,7 +181,6 @@ dereferenceXRefs=0;cameraXFov=0;cameraYFov=1</comments>
   <library_visual_scenes>
     <visual_scene id="VisualSceneNode" name="ChessSet_Ambient">
       <node id="Queen" name="Queen" type="NODE">
-        <translate sid="translate">2.09232 0 0</translate>
         <rotate sid="rotateZ">0 0 1 0</rotate>
         <rotate sid="rotateY">0 1 0 0</rotate>
         <rotate sid="rotateX">1 0 0 0</rotate>
