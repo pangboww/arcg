@@ -7,16 +7,13 @@ var renderer;
 var scene1, scene2;
 var camera1, camera2;
 var model, texture;
-var board;
+var modelSize = 36;
 
-var white = THREE.ImageUtils.loadTexture('Models/textures/whitemarble.jpg');
-var black = THREE.ImageUtils.loadTexture('Models/textures/blackmarble.jpg');
-
-var modelSize = 30;
-
-var count = 0;
-
-
+THREE.Object3D.prototype.move = function(x, y, z){
+    this.position.x += x;
+    this.position.y += y;
+    this.position.z += z;
+}
 
 function onLoad(){
     video = document.getElementById("video");
@@ -92,8 +89,6 @@ function drawCorners(markers){
 };
 
 function createRenderers(){
-
-
     renderer = new THREE.WebGLRenderer();
     renderer.setClearColor(0xffffff, 1);
     renderer.setSize(canvas.width, canvas.height);
@@ -109,8 +104,6 @@ function createRenderers(){
     var light = new THREE.PointLight(0xfffff3, 1);
     light.position.set(-100,400,200);
     scene2.add(light);
-
-
 };
 
 function render(){
@@ -145,46 +138,49 @@ function createTexture(){
 };
 
 function createModel(){
-    //var object = new THREE.Object3D(),
-    //    geometry = new THREE.BoxGeometry(5,5,0.5),
-    //    material = new THREE.MeshBasicMaterial( {color: 0x00ff00}),
-    //    mesh = new THREE.Mesh(geometry, material);
+    var object = new ChessBoard();
+
+    //var loader = new THREE.ColladaLoader();
+
+    //loader.options.convertUpAxis = true;
     //
-    //object.add(mesh);
-    var object = new THREE.Object3D;
-    var loader = new THREE.ColladaLoader();
-
-    loader.options.convertUpAxis = true;
-
-    loader.load( 'Models/board.dae', function ( collada ) {
-        var dae = collada.scene;
-        dae.traverse(function(mesh){
-            if(mesh instanceof THREE.Mesh){
-                mesh.rotation.set(Math.PI/2,0,0);
-                mesh.scale.set(15,15,15);
-                object.add(mesh);
-                console.log(mesh);
-            }
-        });
-    });
-
-    //loader.load( 'Models/knight.dae', function ( collada ) {
-    //    var dae = collada.scene;
-    //    dae.position.set(0,0,0);
-    //    dae.scale.set(1,1,1);
-    //    console.log(dae);
-    //
-    //    dae.traverse(function(mesh){
-    //        if(mesh instanceof THREE.Mesh){
-    //            mesh.material.map = black;
-    //            mesh.material.map.needsUpdate = true;
-    //            mesh.scale.set(1,1,1);
-    //            mesh.rotation.set(Math.PI/2,0,0);
-    //            mesh.position.set(0,0,40);
-    //            object.add(mesh);
-    //        }
-    //    });
+    //loader.load( 'Models/Board.dae', function ( collada ) {
+    //    var dae = collada.scene.children[0];
+    //    dae.scale.set(15,15,15);
+    //    dae.rotation.set(Math.PI/2,0,0);
+    //    dae.name = "Board";
+    //    object.add(dae);
     //});
+    //
+    //loader.load( 'Models/White_King.dae', function ( collada ) {
+    //    var dae = collada.scene;
+    //    dae.position.set(15,15,15);
+    //    dae.scale.set(12,12,12);
+    //    dae.rotation.set(Math.PI/2,0,0);
+    //    object.add(dae);
+    //});
+    //loader.load( 'Models/White_Bishop.dae', function ( collada ) {
+    //    var dae = collada.scene;
+    //    dae.position.set(-15,-15,15);
+    //    dae.scale.set(12,12,12);
+    //    dae.rotation.set(Math.PI/2,0,0);
+    //    object.add(dae);
+    //});
+    //loader.load( 'Models/Black_Queen.dae', function ( collada ) {
+    //    var dae = collada.scene;
+    //    dae.position.set(15,-15,15);
+    //    dae.scale.set(12,12,12);
+    //    dae.rotation.set(Math.PI/2,0,0);
+    //    object.add(dae);
+    //});
+    //loader.load( 'Models/Black_Pawn.dae', function ( collada ) {
+    //    var dae = collada.scene;
+    //    dae.position.set(-15,15,15);
+    //    dae.scale.set(12,12,12);
+    //    dae.rotation.set(Math.PI/2,0,0);
+    //    object.add(dae);
+    //});
+
 
 
     return object;
