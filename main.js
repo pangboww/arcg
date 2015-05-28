@@ -7,7 +7,10 @@ var renderer;
 var scene1, scene2;
 var camera1, camera2;
 var model, texture;
-var modelSize = 36;
+
+var board;
+
+var loader = new THREE.ColladaLoader();
 
 THREE.Object3D.prototype.move = function(x, y, z){
     this.position.x += x;
@@ -138,8 +141,8 @@ function createTexture(){
 };
 
 function createModel(){
-    var object = new ChessBoard();
-
+    board = new ChessBoard();
+    var object = board.getChessBoard();
     //var loader = new THREE.ColladaLoader();
 
     //loader.options.convertUpAxis = true;
