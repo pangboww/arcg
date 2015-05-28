@@ -16,8 +16,21 @@ Piece.prototype = Object.create(THREE.Object3D.prototype);
 Piece.prototype.constructor = Piece;
 
 Piece.prototype.move = function(x, y){
-    this.x += x;
-    this.y += y;
+    var tx = this.x += x;
+    var ty = this.y += y;
+    if(tx === 0){
+        this.x = x > 0 ? 1 : -1;
+    } else {
+        this.x = tx;
+    }
+    if(ty === 0){
+        this.y = y > 0 ? 1 : -1;
+    } else {
+        this.y = ty;
+    }
+
+
+
     this.updatePosition();
 }
 
