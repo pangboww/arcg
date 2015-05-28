@@ -3,15 +3,14 @@
  */
 
 
-var Piece = function(x, y, color){
+var Piece = function(x, y, color, board){
     THREE.Object3D.call(this);
     this.x = x;
     this.y = y;
     this.z = 0;
-    console.log(this.x);
-    console.log(this.y);
     this.modelUrl = "";
     this.color = color;
+    this.board = board;
 }
 
 Piece.prototype = Object.create(THREE.Object3D.prototype);

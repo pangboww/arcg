@@ -104,9 +104,12 @@ function createRenderers(){
     camera2 = new THREE.PerspectiveCamera(40, canvas.width / canvas.height, 1, 1000);
     scene2.add(camera2);
 
-    var light = new THREE.PointLight(0xfffff3, 1);
-    light.position.set(-100,400,200);
-    scene2.add(light);
+    var light1 = new THREE.PointLight(0xfffff3, 1);
+    light1.position.set(-100,400,200);
+    scene2.add(light1);
+    var light2 = new THREE.PointLight(0xfffff3, 0.3);
+    light2.position.set(400,200,200);
+    scene2.add(light2);
 };
 
 function render(){

@@ -2,8 +2,8 @@
  * Created by bopang on 28/05/15.
  */
 
-var Knight = function(x, y, color){
-    Piece.call(this, x, y, color);
+var Knight = function(x, y, color, board){
+    Piece.call(this, x, y, color, board);
     this.modelUrl = color ? 'Models/White_Knight.dae': 'Models/Black_Knight.dae';
     this.updatePosition();
     this.updateRotation();

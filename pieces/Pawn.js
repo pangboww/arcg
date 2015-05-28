@@ -2,8 +2,8 @@
  * Created by bopang on 28/05/15.
  */
 
-var Pawn = function(x, y, color){
-    Piece.call(this, x, y, color);
+var Pawn = function(x, y, color, board){
+    Piece.call(this, x, y, color, board);
     this.modelUrl = color ? 'Models/White_Pawn.dae': 'Models/Black_Pawn.dae';
     this.updatePosition();
     this.loadModel();
