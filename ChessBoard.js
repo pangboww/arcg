@@ -6,6 +6,7 @@ var ChessBoard = function () { this.init(); }
 
 ChessBoard.prototype.init = function(){
 
+    this.board = new Board();
 
     this.bishop = new Bishop(1,1,BLACK);
 
@@ -14,6 +15,7 @@ ChessBoard.prototype.init = function(){
     this.chessboard = new THREE.Object3D();
 
 
+    this.chessboard.add(this.board);
     this.chessboard.add(this.bishop);
 
 
