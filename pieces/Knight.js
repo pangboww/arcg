@@ -26,5 +26,29 @@ Knight.prototype.updateRotation = function(){
 Knight.prototype.couldMoveTo = function(){
     var cmt = [];
 
+    for (var i = -2; i <= 2; i++) {
+        if (i == 0) continue;
+        if (this.x + i <= 0 || this.x + i >= 9) continue;
+        var j;
+        if (Math.abs(i) == 2)  j = 1;
+        if (Math.abs(i) == 1)  j = 2;
 
+        if (this.y + j <= 8){
+            if (this.board.posMatrix[this.x + i][this.y + j] === undefined) {
+                cmt.push({x: this.x + i, y: this.y + j});
+            }
+            else if (this.board.posMatrix[this.x + i][this.y + j].color !== this.color) {
+                cmt.push({x: this.x + i, y: this.y + j});
+            }
+        }
+        if (this.y - j >= 1){
+            if (this.board.posMatrix[this.x + i][this.y - j] === undefined) {
+                cmt.push({x: this.x + i, y: this.y - j});
+            }
+            else if (this.board.posMatrix[this.x + i][this.y - j].color !== this.color) {
+                cmt.push({x: this.x + i, y: this.y - j});
+            }
+        }
+    }
+    return cmt;
 }
