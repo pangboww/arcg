@@ -64,6 +64,5 @@ Pawn.prototype.couldMoveTo = function(){
             }
         }
     }
-    console.log(cmt);
     return cmt;
 }
