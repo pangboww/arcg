@@ -14,6 +14,7 @@ Rook.prototype.constructor = Rook;
 
 Rook.prototype.couldMoveTo = function(){
     var cmt = [];
+
     for(var i = 1; i <=7 ; i++){
         if (this.x - i <= 0) break;
         if (this.board.posMatrix[this.x-i][this.y] === undefined) {

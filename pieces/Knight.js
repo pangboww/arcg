@@ -22,3 +22,9 @@ Knight.prototype.updatePosition = function(){
 Knight.prototype.updateRotation = function(){
     this.color ? this.rotation.set(0,0,-Math.PI/2) : this.rotation.set(0,0,Math.PI/2);
 }
+
+Knight.prototype.couldMoveTo = function(){
+    var cmt = [];
+
+
+}
