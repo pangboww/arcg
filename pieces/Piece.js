@@ -22,6 +22,11 @@ Piece.prototype.move = function(x, y){
     this.updatePosition();
 }
 
+Piece.prototype.moveTo = function(x,y){
+    this.x = x;
+    this.y = y;
+}
+
 Piece.prototype.updatePosition = function(){
     this.position.x = (2 * this.x - 9) * positionScale;
     this.position.y = (2 * this.y - 9) * positionScale;
