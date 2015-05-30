@@ -4,6 +4,7 @@
 
 var ChessBoard = function () { this.init(); }
 
+
 ChessBoard.prototype.init = function(){
     this.posMatrix;
     this.chessboard = new THREE.Object3D();
@@ -64,4 +65,49 @@ ChessBoard.prototype.init = function(){
 ChessBoard.prototype.getChessBoard = function(){
     return this.chessboard;
 }
+
+ChessBoard.prototype.pieceCouldMoveTo = function(x ,y){
+    if(this.posMatrix[x][y] === undefined){
+        return "No piece here"
+    }
+    else {
+        return this.posMatrix[x][y].couldMoveTo();
+    }
+}
+
+ChessBoard.prototype.movePieceTo = function(x, y, toX, toY){
+    if(this.posMatrix[x][y] === undefined){
+        return "No piece here"
+    }
+    else if(this.posMatrix[x][y].couldMoveTo().contains({x:toX,y:toY})){
+        if (this.posMatrix[toX][toY] !== undefined){
+            this.removePiece(toX,toY);
+        }
+        this.posMatrix[x][y].moveTo(toX,toY);
+        this.posMatrix[toX][toY] = this.posMatrix[x][y];
+        this.posMatrix[x][y] = undefined;
+        return "move to x:" + toX + " y:" + toY;
+    }
+    else {
+        return "could not move to x:" + toX + " y:" + toY;
+    }
+}
+
+ChessBoard.prototype.removePiece = function(x, y){
+    if(this.posMatrix[x][y] === undefined){
+        return "Could not remove , no piece here."
+    }
+    this.chessboard.remove(this.posMatrix[x][y]);
+    this.posMatrix[x][y] = undefined;
+}
+
+Array.prototype.contains = function(value) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i].x == value.x && this[i].y == value.y){
+            return true;
+        }
+    }
+    return false;
+}
+
 

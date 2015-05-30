@@ -7,16 +7,9 @@ var renderer;
 var scene1, scene2;
 var camera1, camera2;
 var model, texture;
-
 var board;
 
 var loader = new THREE.ColladaLoader();
-
-THREE.Object3D.prototype.move = function(x, y, z){
-    this.position.x += x;
-    this.position.y += y;
-    this.position.z += z;
-}
 
 function onLoad(){
     video = document.getElementById("video");
@@ -63,7 +56,6 @@ function tick(){
         snapshot();
 
         var markers = detector.detect(imageData);
-        drawCorners(markers);
         updateScenes(markers);
 
         render();
@@ -73,22 +65,6 @@ function tick(){
 function snapshot(){
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-};
-
-function drawCorners(markers){
-    var corners, i;
-    var length;
-
-    context.lineWidth = 3;
-
-    for (i = 0; i < markers.length; ++ i){
-        corners = markers[i].corners;
-
-        length = corners[1].x - corners[0].x;
-        length = length > 0 ? length : -length;
-        context.strokeStyle = "blue";
-        context.strokeRect(corners[0].x, corners[0].y, length, length);
-    }
 };
 
 function createRenderers(){
@@ -146,49 +122,6 @@ function createTexture(){
 function createModel(){
     board = new ChessBoard();
     var object = board.getChessBoard();
-    //var loader = new THREE.ColladaLoader();
-
-    //loader.options.convertUpAxis = true;
-    //
-    //loader.load( 'Models/Board.dae', function ( collada ) {
-    //    var dae = collada.scene.children[0];
-    //    dae.scale.set(15,15,15);
-    //    dae.rotation.set(Math.PI/2,0,0);
-    //    dae.name = "Board";
-    //    object.add(dae);
-    //});
-    //
-    //loader.load( 'Models/White_King.dae', function ( collada ) {
-    //    var dae = collada.scene;
-    //    dae.position.set(15,15,15);
-    //    dae.scale.set(12,12,12);
-    //    dae.rotation.set(Math.PI/2,0,0);
-    //    object.add(dae);
-    //});
-    //loader.load( 'Models/White_Bishop.dae', function ( collada ) {
-    //    var dae = collada.scene;
-    //    dae.position.set(-15,-15,15);
-    //    dae.scale.set(12,12,12);
-    //    dae.rotation.set(Math.PI/2,0,0);
-    //    object.add(dae);
-    //});
-    //loader.load( 'Models/Black_Queen.dae', function ( collada ) {
-    //    var dae = collada.scene;
-    //    dae.position.set(15,-15,15);
-    //    dae.scale.set(12,12,12);
-    //    dae.rotation.set(Math.PI/2,0,0);
-    //    object.add(dae);
-    //});
-    //loader.load( 'Models/Black_Pawn.dae', function ( collada ) {
-    //    var dae = collada.scene;
-    //    dae.position.set(-15,15,15);
-    //    dae.scale.set(12,12,12);
-    //    dae.rotation.set(Math.PI/2,0,0);
-    //    object.add(dae);
-    //});
-
-
-
     return object;
 }
 
