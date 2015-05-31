@@ -13,6 +13,8 @@ Rook.prototype = Object.create(Piece.prototype);
 Rook.prototype.constructor = Rook;
 
 Rook.prototype.couldMoveTo = function(){
+    this.x = parseInt(this.x);
+    this.y = parseInt(this.y);
     var cmt = [];
 
     for(var i = 1; i <=7 ; i++){

@@ -28,16 +28,20 @@
 
     <div style="margin: 10px;"><strong>-= Augmented Chess Game =-</strong></div>
     <div style="width: 100%;">
-        <div style="width: 650px; margin-left:auto; margin-right:auto;">
+        <div style="width: 1280px; margin-left:auto; margin-right:auto;">
 
-            <canvas id="canvas" style="width: 640px; height: 480px; float: left; border: solid 1px black;"></canvas>
+            <canvas id="canvas" style="width: 1280px; height: 960px; float: left; border: solid 1px black;"></canvas>
 
-            <div id="container" style="width: 640px; height: 480px; float: left; border: solid 1px black; background: green;"></div>
+            <div id="container" style="width: 1280px; height: 960px; float: left; border: solid 1px black; background: green;"></div>
 
         </div>
     </div>
-    <div style="margin: 15px;">
-        <strong>Powered by <a href="http://code.google.com/p/js-aruco/">js-aruco</a> and <a href="https://github.com/mrdoob/three.jsThree.js"></a></strong>
+    <div id="controller" >
+        <div>GAME CONTROLLER</div>
+        <div>Choose Piece -- x:<input id="x" type="text" name="x" style="width:30px;" placeholder="1-8"> y:<input id="y" type="text" name="y" style="width:30px;" placeholder="1-8"></div>
+        <button type="button" onclick="choosePiece()">OK</button>
+        <div id="posList">
+        </div>
     </div>
 </body>
 </html>

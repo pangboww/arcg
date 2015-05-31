@@ -14,6 +14,8 @@ King.prototype.constructor = King;
 
 King.prototype.couldMoveTo = function(){
     var cmt = [];
+    this.x = parseInt(this.x);
+    this.y = parseInt(this.y);
 
     for(var i = -1; i <= 1; i++){
         if (this.x + i <= 0 || this.x + i >= 9) continue;

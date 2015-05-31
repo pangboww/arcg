@@ -25,6 +25,8 @@ Knight.prototype.updateRotation = function(){
 
 Knight.prototype.couldMoveTo = function(){
     var cmt = [];
+    this.x = parseInt(this.x);
+    this.y = parseInt(this.y);
 
     for (var i = -2; i <= 2; i++) {
         if (i == 0) continue;

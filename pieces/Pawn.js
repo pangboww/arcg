@@ -14,6 +14,8 @@ Pawn.prototype.constructor = Pawn;
 
 Pawn.prototype.couldMoveTo = function(){
     var cmt = [];
+    this.x = parseInt(this.x);
+    this.y = parseInt(this.y);
     if (this.color == WHITE){
         if (this.board.posMatrix[this.x][this.y+1] === undefined) cmt.push({x:this.x,y:this.y+1});
         if (this.y == 2

@@ -8,6 +8,7 @@ var scene1, scene2;
 var camera1, camera2;
 var model, texture;
 var board;
+var x, y;
 
 var loader = new THREE.ColladaLoader();
 
@@ -15,6 +16,8 @@ function onLoad(){
     video = document.getElementById("video");
     canvas = document.getElementById("canvas");
     context = canvas.getContext("2d");
+    canvas.style.display = "none";
+
 
     canvas.width = parseInt(canvas.style.width);
     canvas.height = parseInt(canvas.style.height);
@@ -159,6 +162,62 @@ function updateObject(object, rotation, translation){
     object.position.y = translation[1];
     object.position.z = -translation[2];
 };
+
+function choosePiece(){
+    x = document.getElementById("x").value;
+    y = document.getElementById("y").value;
+    var posList = document.getElementById("posList");
+    while (posList.firstChild) {
+        posList.removeChild(posList.firstChild);
+    }
+    var moveList = board.pieceCouldMoveTo(x,y);
+    if (typeof moveList == 'string'){
+        var textNode = document.createTextNode("No Piece Here");
+        document.getElementById("posList").appendChild(textNode);
+    }
+    else if (moveList instanceof Array){
+        if (moveList.length > 0){
+            var form = document.createElement("form");
+            form.setAttribute("id","choices");
+            for (var i = 0; i < moveList.length; i++){
+                var p = moveList[i];
+                var choice = document.createElement("input");
+                choice.setAttribute("type","radio");
+                choice.setAttribute("name","moveTo");
+                choice.setAttribute("x",p.x);
+                choice.setAttribute("y",p.y);
+                form.appendChild(choice);
+                var textNode = document.createTextNode("x: "+ p.x + "  y: " + p.y);
+                form.appendChild(textNode);
+                var br = document.createElement('br');
+                form.appendChild(br);
+
+            }
+            var button = document.createElement("button");
+            button.setAttribute("type","button");
+            button.setAttribute("onclick","movePiece()");
+            button.innerHTML = "Move";
+            form.appendChild(button);
+            posList.appendChild(form);
+        }
+        else {
+            var textNode = document.createTextNode("No Place to move")
+            document.getElementById("posList").appendChild(textNode);
+        }
+    }
+}
+
+function movePiece(){
+    var choices = document.getElementsByName('moveTo');
+    var toX, toY;
+    for(var i = 0; i < choices.length; i++){
+        if(choices[i].checked){
+            toX = choices[i].getAttribute("x");
+            toY = choices[i].getAttribute("y");
+        }
+        board.movePieceTo(x, y, toX, toY);
+    }
+}
 
 
 window.onload = onLoad;

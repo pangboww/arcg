@@ -14,6 +14,8 @@ Bishop.prototype.constructor = Bishop;
 
 Bishop.prototype.couldMoveTo = function(){
     var cmt = [];
+    this.x = parseInt(this.x);
+    this.y = parseInt(this.y);
     for(var i = 1; i <=7 ; i++){
         if (this.x - i <= 0 || this.y - i <= 0) break;
         if (this.board.posMatrix[this.x-i][this.y-i] === undefined) {
